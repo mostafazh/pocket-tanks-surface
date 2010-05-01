@@ -27,6 +27,9 @@ namespace Pocket_Tanks_Surface
         private bool applicationLoadCompleteSignalled;
         private Matrix screenTransform = Matrix.Identity;
 
+        private SpriteBatch spriteBatch;
+        private Background background;
+
         // application state: Activated, Previewed, Deactivated,
         // start in Activated state
         private bool isApplicationActivated = true;
@@ -145,6 +148,9 @@ namespace Pocket_Tanks_Surface
         protected override void LoadContent()
         {
             // TODO: Load any content
+            // Load all textures
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            background = new Background(Content.Load<Texture2D>("Background"), 1024, 768);
         }
 
         /// <summary>
@@ -153,6 +159,7 @@ namespace Pocket_Tanks_Surface
         protected override void UnloadContent()
         {
             Content.Unload();
+            background.Unload();
         }
 
         /// <summary>
@@ -194,8 +201,8 @@ namespace Pocket_Tanks_Surface
             //TODO: Rotate the UI based on the value of screenTransform here if desired
 
             graphics.GraphicsDevice.Clear(backgroundColor);
-
             //TODO: Add your drawing code here
+            background.Draw(spriteBatch);
             //TODO: Avoid any expensive logic if application is neither active nor previewed
 
             base.Draw(gameTime);
