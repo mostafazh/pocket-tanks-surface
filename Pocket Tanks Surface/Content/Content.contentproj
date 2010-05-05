@@ -42,15 +42,13 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Tank_Gun.png">
-      <Name>Tank_Gun</Name>
+    <Compile Include="tank body.png">
+      <Name>tank body</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Tank_Body.png">
-      <Name>Tank_Body</Name>
+    <Compile Include="tank gun.png">
+      <Name>tank gun</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>

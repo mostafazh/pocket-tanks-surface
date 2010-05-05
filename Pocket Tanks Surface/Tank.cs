@@ -28,21 +28,22 @@ namespace Pocket_Tanks_Surface
         public Texture2D gun;
         public Player owner;
         private bool flag = true;
+        private bool mirrored;
         public Vector2 position;
         private Vector2 _newPosition;
-        private Vector2 newPosition { get { Vector2 n = new Vector2(); n.Y = 609;n.X = _newPosition.X ;return n; } set { _newPosition = value; } }
+        private Vector2 newPosition { get { Vector2 n = new Vector2(); n.Y = 575; n.X = _newPosition.X; return n; } set { _newPosition = value; } }
         public float rotation;
         private Game game;
         public Rectangle BoundryBox { get { return new Rectangle((int)position.X, (int)position.Y, Width, Height); } }
 
-        private Vector2 cannonOrigin = new Vector2(25, 10);
+        private Vector2 cannonOrigin = new Vector2(52, 14);
 
-        public Tank(Game game,Player owner):this(game,owner,0,new Vector2())
+        public Tank(Game game,Player owner):this(game,owner,0,new Vector2(),false)
         {
             
         }
 
-        public Tank(Game game, Player owner,float rotation, Vector2 postion):base(game)
+        public Tank(Game game, Player owner,float rotation, Vector2 postion,bool mirrored):base(game)
         {
             // TODO: Construct any child components here
             this.owner = owner;
@@ -50,12 +51,24 @@ namespace Pocket_Tanks_Surface
             this.position = postion;
             this.newPosition = postion;
             this.game = game;
+            this.mirrored = mirrored;
         }
 
         protected override void LoadContent()
         {
-            gun = game.Content.Load<Texture2D>("Tank_Gun");
-            body = game.Content.Load<Texture2D>("Tank_Body");
+            gun = game.Content.Load<Texture2D>("tank gun");
+            body = game.Content.Load<Texture2D>("tank body");
+            
+            if (gun.Width > body.Width)
+                Width = gun.Width;
+            else
+                Width = body.Width;
+
+            if (gun.Height > body.Height)
+                Height = gun.Height;
+            else
+                Height = body.Height;
+
             base.LoadContent();
         }
 
@@ -76,8 +89,17 @@ namespace Pocket_Tanks_Surface
             // Draw background texture in a separate pass.
             SpriteBatch spriteBatch = new SpriteBatch(game.GraphicsDevice);
             spriteBatch.Begin();
-            spriteBatch.Draw(body, position, owner.color);
-            spriteBatch.Draw(gun, new Vector2((int)position.X + 25, (int)position.Y - 10), null, owner.color, rotation * 0.0174532925f, cannonOrigin, 1, SpriteEffects.None, 1);
+
+            if (!mirrored)
+            {
+                spriteBatch.Draw(body, position, owner.color);
+                spriteBatch.Draw(gun, new Vector2((int)position.X + 57, (int)position.Y + 12), null, owner.color, rotation * 0.0174532925f, cannonOrigin, 1, SpriteEffects.None, 1);
+            }
+            else
+            {
+                spriteBatch.Draw(body, position, null,owner.color,0,new Vector2(),1,SpriteEffects.FlipHorizontally,1);
+                spriteBatch.Draw(gun, new Vector2((int)position.X + 157, (int)position.Y + 12), null, owner.color, rotation * 0.0174532925f, cannonOrigin, 1, SpriteEffects.FlipHorizontally, 1);
+            }
             spriteBatch.End();
         }
 
