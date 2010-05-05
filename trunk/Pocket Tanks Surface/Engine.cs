@@ -37,6 +37,7 @@ namespace Pocket_Tanks_Surface
                 game = g;
         }
 
+        [MethodImplAttribute(MethodImplOptions.Synchronized)] 
         public static Engine GetInstance()
         {
             if(instance == null)
