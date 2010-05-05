@@ -17,13 +17,13 @@ namespace Pocket_Tanks_Surface
         private static LinkedList<Player> Players = new LinkedList<Player>();
         public Tank tank;
 
-        public Player(Game game,string name,Color color,float rotation, Vector2 position)
+        public Player(Game game, string name, Color color, float rotation, Vector2 position, bool mirrored)
         {
             this.name = name;
             this.color = color;
             this._number = count++;
             Players.AddLast(this);
-            tank = new Tank(game, this, rotation, position);
+            tank = new Tank(game, this, rotation, position, mirrored);
         }
 
         public static Player GetPlayer(int index)

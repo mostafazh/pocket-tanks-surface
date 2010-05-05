@@ -24,8 +24,8 @@ namespace Pocket_Tanks_Surface
 
         private Engine(Game game)
         {
-            _p1 = new Player(game, "Player 1", Color.Red ,180,new Vector2(1024-50,609));
-            _p2 = new Player(game, "Player 2", Color.Blue, 0, new Vector2(0, 609));
+            _p1 = new Player(game, "Player 1", Color.Red, 0, new Vector2(1024 - 165, 575),false);
+            _p2 = new Player(game, "Player 2", Color.Blue, 0, new Vector2(0, 575), true);
             _InTurn = P1;
             P1.tank.moveEnded += new moveEndedEvent(tank_moveEnded);
             P2.tank.moveEnded += new moveEndedEvent(tank_moveEnded);

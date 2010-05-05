@@ -210,7 +210,7 @@ namespace Pocket_Tanks_Surface
 
         private bool isValidMove(Vector2 newPosition)
         {
-            return newPosition.Y >= 609 && newPosition.Y <= 659;
+            return newPosition.Y >= 575 && newPosition.Y <= 660;
         }
 
 
