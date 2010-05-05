@@ -12,6 +12,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Microsoft.Xna.Framework.Net;
 using Microsoft.Xna.Framework.Storage;
+using CoreInteractionFramework;
+using Cloth.UI;
 
 namespace Pocket_Tanks_Surface
 {
@@ -58,6 +60,7 @@ namespace Pocket_Tanks_Surface
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Engine.SetGame(this);
         }
 
         /// <summary>
@@ -90,7 +93,8 @@ namespace Pocket_Tanks_Surface
 
                 screenTransform = rotation * translation;
             }
-
+            Engine.GetInstance().P1.tank.Initialize();
+            Engine.GetInstance().P2.tank.Initialize();
             base.Initialize();
         }
 
@@ -177,11 +181,34 @@ namespace Pocket_Tanks_Surface
                     // Use the following code to get the state of all current contacts.
                     // ReadOnlyContactCollection contacts = contactTarget.GetState();
                 }
-
+                ReadOnlyContactCollection rocc = contactTarget.GetState();
+                if(rocc != null && rocc.Count >= 1)
+                {
+                    Contact c = rocc.First<Contact>();
+                    contactTarget.ContactAdded += new EventHandler<ContactEventArgs>(contactTarget_ContactAdded);
+                    
+                }
+                Engine.GetInstance().P1.tank.Update(gameTime);
+                Engine.GetInstance().P2.tank.Update(gameTime);
                 // TODO: Add your update logic here
             }
-
             base.Update(gameTime);
+        }
+
+        private void contactTarget_ContactAdded(object sender, ContactEventArgs a)
+        {
+            Console.WriteLine("Click");
+            Contact c = a.Contact;
+            Vector2 newPosition = new Vector2(c.CenterX, c.CenterY);
+            if (isValidMove(newPosition))
+            {
+                Engine.GetInstance().Move(newPosition);
+            }
+        }
+
+        private bool isValidMove(Vector2 newPosition)
+        {
+            return newPosition.Y >= 609 && newPosition.Y <= 659;
         }
 
 
@@ -199,12 +226,12 @@ namespace Pocket_Tanks_Surface
             }
 
             //TODO: Rotate the UI based on the value of screenTransform here if desired
-
             graphics.GraphicsDevice.Clear(backgroundColor);
             //TODO: Add your drawing code here
             background.Draw(spriteBatch);
+            Engine.GetInstance().P1.tank.Draw();
+            Engine.GetInstance().P2.tank.Draw();
             //TODO: Avoid any expensive logic if application is neither active nor previewed
-
             base.Draw(gameTime);
         }
 
@@ -285,6 +312,5 @@ namespace Pocket_Tanks_Surface
         }
 
         #endregion
-
     }
 }
