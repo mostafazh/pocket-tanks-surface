@@ -22,8 +22,6 @@ namespace Pocket_Tanks_Surface
         private Player _InTurn;
         public Player InTurn { get { return _InTurn; } }
 
-        private bool CanAcceptNewContact = true;
-
         private Engine(Game game)
         {
             _p1 = new Player(game, "Player 1", Color.Red ,180,new Vector2(1024-50,609));
@@ -54,18 +52,13 @@ namespace Pocket_Tanks_Surface
         [MethodImplAttribute(MethodImplOptions.Synchronized)] 
         public void Move(Vector2 newPosition)
         {
-            if (CanAcceptNewContact)
-            {
-                CanAcceptNewContact = false;
-                InTurn.tank.Move(newPosition);
-            }
+            InTurn.tank.Move(newPosition);
         }
 
         private void tank_moveEnded()
         {
             Console.WriteLine("Move Ended");
             NextTurn();
-            CanAcceptNewContact = true;
         }
     }
 }
