@@ -37,12 +37,15 @@ namespace Pocket_Tanks_Surface
                 game = g;
         }
 
-        [MethodImplAttribute(MethodImplOptions.Synchronized)] 
-        public static Engine GetInstance()
+        
+        public static Engine Instance
         {
+            [MethodImplAttribute(MethodImplOptions.Synchronized)]
+            get{
             if(instance == null)
                 instance = new Engine(game);
             return instance;
+            }
         }
 
         private void NextTurn()
@@ -58,7 +61,6 @@ namespace Pocket_Tanks_Surface
 
         private void tank_moveEnded()
         {
-            Console.WriteLine("Move Ended");
             NextTurn();
         }
     }

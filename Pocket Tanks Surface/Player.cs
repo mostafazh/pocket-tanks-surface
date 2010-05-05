@@ -33,7 +33,7 @@ namespace Pocket_Tanks_Surface
 
         public bool CanMove()
         {
-            return Engine.GetInstance().InTurn == this;
+            return Engine.Instance.InTurn == this;
         }
     }
 }

@@ -120,9 +120,6 @@ namespace Pocket_Tanks_Surface
 
         private void Goto(Vector2 newPosition)
         {
-            Console.WriteLine("GOTO");
-            Console.WriteLine(newPosition);
-            Console.WriteLine(position);
             //GO UP
             if (newPosition.Y < position.Y)
                 position.Y -= 1;
