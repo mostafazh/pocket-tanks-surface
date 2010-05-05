@@ -70,10 +70,9 @@ namespace Pocket_Tanks_Surface
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
             SetWindowOnSurface();
             InitializeSurfaceInput();
-
+            Components.ComponentAdded+=new EventHandler<GameComponentCollectionEventArgs>(Components_ComponentAdded);
             // Set the application's orientation based on the current launcher orientation
             currentOrientation = ApplicationLauncher.Orientation;
 
@@ -91,9 +90,14 @@ namespace Pocket_Tanks_Surface
 
                 screenTransform = rotation * translation;
             }
-            Engine.GetInstance().P1.tank.Initialize();
-            Engine.GetInstance().P2.tank.Initialize();
+            Engine.Instance.P1.tank.Initialize();
+            Engine.Instance.P2.tank.Initialize();
             base.Initialize();
+        }
+
+        private void Components_ComponentAdded(object sender, GameComponentCollectionEventArgs a)
+        {
+            Console.WriteLine(a);
         }
 
         /// <summary>
@@ -186,8 +190,8 @@ namespace Pocket_Tanks_Surface
                     contactTarget.ContactAdded += new EventHandler<ContactEventArgs>(contactTarget_ContactAdded);
                     
                 }
-                Engine.GetInstance().P1.tank.Update(gameTime);
-                Engine.GetInstance().P2.tank.Update(gameTime);
+                Engine.Instance.P1.tank.Update(gameTime);
+                Engine.Instance.P2.tank.Update(gameTime);
                 // TODO: Add your update logic here
             }
             base.Update(gameTime);
@@ -200,7 +204,7 @@ namespace Pocket_Tanks_Surface
             Vector2 newPosition = new Vector2(c.CenterX, c.CenterY);
             if (isValidMove(newPosition))
             {
-                Engine.GetInstance().Move(newPosition);
+                Engine.Instance.Move(newPosition);
             }
         }
 
@@ -227,8 +231,8 @@ namespace Pocket_Tanks_Surface
             graphics.GraphicsDevice.Clear(backgroundColor);
             //TODO: Add your drawing code here
             background.Draw(spriteBatch);
-            Engine.GetInstance().P1.tank.Draw();
-            Engine.GetInstance().P2.tank.Draw();
+            Engine.Instance.P1.tank.Draw();
+            Engine.Instance.P2.tank.Draw();
             //TODO: Avoid any expensive logic if application is neither active nor previewed
             base.Draw(gameTime);
         }
