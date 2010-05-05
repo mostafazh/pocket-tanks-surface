@@ -10,6 +10,24 @@
       <Output>E:\Projects\pocket-tanks-surface\Pocket Tanks Surface\bin\x86\Debug\Content\background.xnb</Output>
       <Time>2010-04-28T19:54:19.1400633+02:00</Time>
     </Item>
+    <Item>
+      <Source>Tank_Gun.png</Source>
+      <Name>Tank_Gun</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\Projects\pocket-tanks-surface\Pocket Tanks Surface\bin\x86\Debug\Content\Tank_Gun.xnb</Output>
+      <Time>2010-05-04T14:39:21.842+02:00</Time>
+    </Item>
+    <Item>
+      <Source>Tank_Body.png</Source>
+      <Name>Tank_Body</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>E:\Projects\pocket-tanks-surface\Pocket Tanks Surface\bin\x86\Debug\Content\Tank_Body.xnb</Output>
+      <Time>2010-05-04T14:40:39.96+02:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
